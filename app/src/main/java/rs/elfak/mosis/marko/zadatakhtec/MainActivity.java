@@ -20,15 +20,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Row> rows;
-    private RowAdapter rowAdapter;
-    List<Row> list;
-
     ListView listView;
-
-
     private static String url="https://raw.githubusercontent.com/danieloskarsson/mobile-coding-exercise/master/items.json";
-
     // JSON Node names
     private static final String TAG_IMAGE = "image";
     private static final String TAG_TITLE = "title";
@@ -40,9 +33,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         listView=(ListView)findViewById(R.id.list_view);
-
         //Callig async task to get JSON
-        //new GetRows().execute();
+        new GetRows().execute();
 
     }
 
@@ -83,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     R.layout.list_item, new String[]{TAG_TITLE,TAG_DESCRIPTION },
                     new int[]{R.id.row_title, R.id.row_description});
             listView.setAdapter(adapter);
+
         }
     }
 
@@ -103,6 +96,33 @@ public class MainActivity extends AppCompatActivity {
                     String image=object.getString(TAG_IMAGE);
                     String title=object.getString(TAG_TITLE);
                     String desc=object.getString(TAG_DESCRIPTION);
+
+                    int toWrap = 50;
+                    int lineBreakIndex = desc.indexOf('\n');
+
+                    if(desc.length()>50|| lineBreakIndex <50)
+                    {
+                        if(lineBreakIndex < 50) {
+                            toWrap = lineBreakIndex;
+                        }
+                        if(toWrap > 0) {
+                          desc=desc.substring(0, toWrap) + "...";
+                        } else {
+                        }
+                    }
+
+/*                    if(note.getText().length() > WRAP_CONTENT_LENGTH || lineBreakIndex < WRAP_CONTENT_LENGTH) {
+                        if(lineBreakIndex < WRAP_CONTENT_LENGTH) {
+                            toWrap = lineBreakIndex;
+                        }
+                        if(toWrap > 0) {
+                            content.setText(note.getText().substring(0, toWrap) + "...");
+                        } else {
+                            content.setText(note.getText());
+                        }
+                    } else { //if less than 50 chars...leave it as is :P
+                        content.setText(note.getText());
+                    }*/
 
                     final HashMap<String, String> row = new HashMap<String, String>();
 
