@@ -10,6 +10,10 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
     private class GetRows extends AsyncTask<Void,Void,Void>
     {
-        //Hashmap for listView
         ArrayList<HashMap<String,String>> rowList;
         ProgressDialog proDialog;
         @Override
@@ -81,9 +84,46 @@ public class MainActivity extends AppCompatActivity {
                     new int[]{R.id.row_title, R.id.row_description});
             listView.setAdapter(adapter);
         }
-
-
-
     }
 
+    private ArrayList<HashMap<String,String>> ParseJSON(String json)
+    {
+        if(json!=null)
+        {
+            try
+            {
+                ArrayList<HashMap<String,String>> rowList=new ArrayList<HashMap<String, String>>();
+
+                JSONArray array= new JSONArray(json);
+
+                for(int i=0;i<array.length();i++)
+                {
+                    JSONObject object=array.getJSONObject(i);
+
+                    String image=object.getString(TAG_IMAGE);
+                    String title=object.getString(TAG_TITLE);
+                    String desc=object.getString(TAG_DESCRIPTION);
+
+                    final HashMap<String, String> row = new HashMap<String, String>();
+
+                    row.put(TAG_IMAGE,image);
+                    row.put(TAG_TITLE,title);
+                    row.put(TAG_DESCRIPTION,desc);
+
+                    rowList.add(row);
+                }
+                return rowList;
+            }
+            catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        else
+        {
+            Log.e("ServiceHandler", "No data received from HTTP Request");
+            return null;
+        }
+
+    }
 }
