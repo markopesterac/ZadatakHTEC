@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Medium Text"
-        android:id="@+id/row_desc"
+        android:id="@+id/row_description"
         />
 
 </LinearLayout>
