@@ -1,10 +1,13 @@
 package rs.elfak.mosis.marko.zadatakhtec;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -36,6 +39,24 @@ public class MainActivity extends AppCompatActivity {
         listView=(ListView)findViewById(R.id.list_view);
         //Callig async task to get JSON
         new GetRows().execute();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                HashMap<String,String> row= (HashMap<String, String>) adapterView.getItemAtPosition(i);
+                String image= row.get(TAG_IMAGE);
+                String title=row.get(TAG_TITLE);
+                String description=row.get(TAG_DESCRIPTION);
+
+                Intent ca=new Intent(MainActivity.this.getApplicationContext(),RowActivity.class);
+                ca.putExtra("image",image);
+                ca.putExtra("title",title);
+                ca.putExtra("description",description);
+                startActivity(ca);
+
+            }
+        });
+
 
     }
 
@@ -73,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
              * */
             ListAdapter adapter = new SimpleAdapter(
                     MainActivity.this, rowList,
-                    R.layout.list_item, new String[]{TAG_TITLE,TAG_DESC},
+                    R.layout.list_item, new String[]{TAG_TITLE,TAG_DESC },
                     new int[]{R.id.row_title, R.id.row_description});
             listView.setAdapter(adapter);
 
