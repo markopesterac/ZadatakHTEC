@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     // JSON Node names
     private static final String TAG_IMAGE = "image";
     private static final String TAG_TITLE = "title";
-    private static final String TAG_DESC="";
     private static final String TAG_DESCRIPTION = "description";
 
     @Override
@@ -79,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
             WebRequest webreq = new WebRequest();
             // Making a request to url and getting response
             String jsonStr = webreq.makeWebServiceCall(url);
-            Log.d("Response: ", "> " + jsonStr);
             rowList = ParseJSON(jsonStr);
             return null;
         }
@@ -94,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
              * */
             ListAdapter adapter = new SimpleAdapter(
                     MainActivity.this, rowList,
-                    R.layout.list_item, new String[]{TAG_TITLE,TAG_DESC },
+                    R.layout.list_item, new String[]{TAG_TITLE,TAG_DESCRIPTION },
                     new int[]{R.id.row_title, R.id.row_description});
             listView.setAdapter(adapter);
 
@@ -117,19 +115,12 @@ public class MainActivity extends AppCompatActivity {
 
                     String image=object.getString(TAG_IMAGE);
                     String title=object.getString(TAG_TITLE);
-                    String desc=object.getString(TAG_DESCRIPTION);
-                    String description=desc;
-
-                    if(desc.length()>50)
-                    {
-                            desc = desc.substring(0, 50) + "...";
-                    }
+                    String description=object.getString(TAG_DESCRIPTION);
 
                     final HashMap<String, String> row = new HashMap<String, String>();
 
                     row.put(TAG_IMAGE,image);
                     row.put(TAG_TITLE,title);
-                    row.put(TAG_DESC,desc);
                     row.put(TAG_DESCRIPTION,description);
 
                     rowList.add(row);

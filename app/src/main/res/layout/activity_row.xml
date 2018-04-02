@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="5dp"
     tools:context="rs.elfak.mosis.marko.zadatakhtec.RowActivity">
 
     <LinearLayout
@@ -20,18 +21,39 @@
             app:srcCompat="@mipmap/ic_launcher_round" />
 
         <TextView
+            android:id="@+id/tex1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Title :"
+            android:textColor="@color/colorForApp"
+            android:paddingBottom="5dp" />
+
+        <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="TextView" />
+            android:textColor="@color/colorForTitle"
+            android:paddingBottom="5dp" />
+
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Description :"
+            android:textColor="@color/colorForApp"
+            android:paddingBottom="5dp" />
 
         <TextView
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:textColor="@color/colorForDescription"
+            android:paddingBottom="5dp"/>
 
     </LinearLayout>
 </LinearLayout>
