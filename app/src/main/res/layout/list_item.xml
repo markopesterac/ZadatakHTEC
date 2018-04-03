@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorForApp"
         android:layout_weight="1"
         android:paddingBottom="5dp"
         />
