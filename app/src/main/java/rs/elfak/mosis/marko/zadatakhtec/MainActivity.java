@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         listView=(ListView)findViewById(R.id.list_view);
         //Callig async task to get JSON
         new GetRows().execute();
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                     R.layout.list_item, new String[]{TAG_TITLE,TAG_DESCRIPTION },
                     new int[]{R.id.row_title, R.id.row_description});
             listView.setAdapter(adapter);
+
 
         }
     }
